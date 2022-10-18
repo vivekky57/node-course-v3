@@ -37,20 +37,25 @@ app.get("/help", (req, res) => {
     name: "Vivek Yadav",
   });
 });
-// app.get("/about", (req, res) => {
-//   res.send([
-//     {
-//       name: "Sara",
-//     },
-//     {
-//       name: "vivek",
-//     },
-//   ]);
-// });
+
 app.get("/weather", (req, res) => {
   res.send({
     forecast: "It is snowing",
     location: "Philadelphia",
+  });
+});
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    errorMessage: "Help article not found",
+    name: "Vivek Yadav",
+  });
+});
+app.get("*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    errorMessage: "My 404 page",
+    name: "Vivek Yadav",
   });
 });
 // app.com
