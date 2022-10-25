@@ -96,10 +96,48 @@ MongoClient.connect(
     //   }
     // );
 
-    db.collection("users")
-      .find({ age: 25 })
-      .toArray((error, users) => {
-        console.log(users);
+    // db.collection("users")
+    //   .find({ age: 25 })
+    //   .toArray((error, users) => {
+    //     console.log(users);
+    //   });
+
+    // Update the fields
+
+    // db.collection("users")
+    //   .updateOne(
+    //     {
+    //       _id: new ObjectId("634f40832146a13886d6209b"),
+    //     },
+    //     {
+    //       $inc: {
+    //         age: 1,
+    //       },
+    //     }
+    //   )
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    db.collection("tasks")
+      .updateMany(
+        {
+          completed: false,
+        },
+        {
+          $set: {
+            completed: true,
+          },
+        }
+      )
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 );
