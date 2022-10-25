@@ -6,12 +6,12 @@ const { MongoClient, ObjectId } = require("mongodb");
 
 const connectionURL = "mongodb://127.0.0.1:27017";
 const databaseName = "task-manager";
+//Object ID creation
+// const id = new ObjectId();
+// console.log(id.id);
 
-const id = new ObjectId();
-console.log(id.id);
-
-console.log(id.id.length);
-console.log(id.toHexString().length);
+// console.log(id.id.length);
+// console.log(id.toHexString().length);
 
 MongoClient.connect(
   connectionURL,
@@ -22,7 +22,7 @@ MongoClient.connect(
     }
 
     const db = client.db(databaseName);
-
+    // CREATE a database then create a collection and insert some keys and values with insertOne and insertMany method
     // db.collection("users").insertOne(
     //   {
     //     name: "vivek",
@@ -81,5 +81,25 @@ MongoClient.connect(
     //     console.log(res.insertedIds[0]);
     //   }
     // );
+
+    // READ or Querying a Document into database and then collection
+
+    // db.collection("users").findOne(
+    //   {
+    //     _id: new ObjectId("63582ad9870d4f0ed8011654"),
+    //   },
+    //   (error, user) => {
+    //     if (error) {
+    //       return console.log("Unable to fetch");
+    //     }
+    //     console.log(user);
+    //   }
+    // );
+
+    db.collection("users")
+      .find({ age: 25 })
+      .toArray((error, users) => {
+        console.log(users);
+      });
   }
 );
