@@ -18,6 +18,14 @@ const port = process.env.PORT || 3000;
 //   res.status(503).send("site is currently down. check back soon!");
 // });
 
+const multer = require("multer");
+const upload = multer({
+  dest: "images",
+});
+app.post("/upload", upload.single("upload"), (req, res) => {
+  res.send();
+});
+
 app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
