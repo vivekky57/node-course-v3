@@ -8,6 +8,7 @@ router.post("/users", async (req, res) => {
   const user = new User(req.body);
   try {
     await user.save();
+    // sendCancelationEmail(user.email,user.name) // because not able to create account in sendgrid website
     const token = await user.generateAuthToken();
     res.status(201).send({ user, token });
   } catch (e) {
@@ -139,6 +140,7 @@ router.delete("/users/me", auth, async (req, res) => {
 
     // const user = await User.findByIdAndDelete(req.user._id);
     await req.user.remove();
+    // sendCancelationEmail(user.email,user.name) // because not able to create account in sendgrid website
     res.send(req.user);
   } catch (e) {
     res.status(500).send();
@@ -158,6 +160,7 @@ const upload = multer({
 });
 
 const sharp = require("sharp");
+const { sendCancelationEmail } = require("../db/emails/account");
 
 router.post(
   "/users/me/avatar",
